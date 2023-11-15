@@ -22,16 +22,12 @@ ssize_t custom_getline(char **lineptr, size_t *n, int fd)
 	if (!lineptr || !n)
 	{
 	return (-1);
-	}
-
-	*lineptr = NULL;
+	} *lineptr = NULL;
 	*n = 0;
-
 	while (!line_terminated)
 	{
 	if (buffer_offset >= buffer_length)
-	{
-	buffer_length = read(fd, buffer, BUFFER_SIZE);
+	{ buffer_length = read(fd, buffer, BUFFER_SIZE);
 	if (buffer_length <= 0)
 	{
 	if (total_length == 0)
@@ -39,8 +35,7 @@ ssize_t custom_getline(char **lineptr, size_t *n, int fd)
 		return (buffer_length);
 		}
 		break;
-		}
-		buffer_offset = 0;
+		} buffer_offset = 0;
 		}
 for (; buffer_offset < buffer_length && !line_terminated; buffer_offset++)
 	{
