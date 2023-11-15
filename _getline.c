@@ -42,9 +42,7 @@ ssize_t custom_getline(char **lineptr, size_t *n, int fd)
 		}
 		buffer_offset = 0;
 		}
-
-	for (; buffer_offset < buffer_length &&
-			!line_terminated; buffer_offset++)
+for (; buffer_offset < buffer_length && !line_terminated; buffer_offset++)
 	{
 	char c = buffer[buffer_offset];
 
