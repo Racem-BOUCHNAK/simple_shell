@@ -14,8 +14,7 @@
 ssize_t custom_getline(char **lineptr, size_t *n, int fd)
 {
 	static char buffer[BUFFER_SIZE];
-	static int buffer_offset;
-	static int buffer_length;
+	static int buffer_offset, buffer_length;
 	ssize_t total_length = 0;
 	int line_terminated = 0;
 
@@ -35,8 +34,7 @@ ssize_t custom_getline(char **lineptr, size_t *n, int fd)
 		return (buffer_length);
 		}
 		break;
-		} buffer_offset = 0;
-		}
+		} buffer_offset = 0; }
 for (; buffer_offset < buffer_length && !line_terminated; buffer_offset++)
 	{
 	char c = buffer[buffer_offset];
