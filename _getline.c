@@ -55,8 +55,7 @@ for (; buffer_offset < buffer_length && !line_terminated; buffer_offset++)
 		}
 	} (*lineptr)[total_length++] = c;
 		if (c == '\n')
-		{
-		line_terminated = 1;
+		{ line_terminated = 1;
 		}
 	}
 	}
