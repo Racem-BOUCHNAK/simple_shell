@@ -5,7 +5,7 @@
  * Return: EXIT_SUCCESS on successful execution
  */
 
-int main()
+int main(void)
 {
 	loop();
 	return (EXIT_SUCCESS);
@@ -21,8 +21,7 @@ void loop(void)
 	char **args;
 	int status;
 
-	do 
-	{
+	do {
 	printf("$ ");
 	fflush(stdout);
 	line = read_line();
