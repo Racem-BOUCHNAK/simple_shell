@@ -1,11 +1,12 @@
 #ifndef hsh_h
 #define hsh_h
+
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include <sys/wait.h>
-#include <sys/types.h>
 #include <sys/stat.h>
 
 #define MAX_LEN 1024
@@ -13,7 +14,7 @@
 #define BUFFER_SIZE 1024
 
 
-
+int main();
 void loop();
 char *read_line();
 char **split_line(char *line);
