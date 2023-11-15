@@ -14,8 +14,8 @@
 #define BUFFER_SIZE 1024
 
 
-int main();
-void loop();
+int main(void);
+void loop(void);
 char *read_line();
 char **split_line(char *line);
 int execute(char **args);
