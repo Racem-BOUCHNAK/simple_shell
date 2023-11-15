@@ -8,7 +8,7 @@
  * Return: Pointer to the read line
  */
 
-char *read_line() 
+char *read_line()
 {
 	char *line = NULL;
 	size_t bufsize = 0;
@@ -23,14 +23,14 @@ char *read_line()
 	return (NULL);
 	}
 
-	return line;
+	return (line);
 }
 
 char **split_line(char *line)
 {
 	int bufsize = 64;
 	int position = 0;
-	char **tokens = malloc(bufsize * sizeof(char*));
+	char **tokens = malloc(bufsize * sizeof(char *));
 	char *token;
 
 	if (!tokens)
@@ -39,12 +39,13 @@ char **split_line(char *line)
 	exit(EXIT_FAILURE);
 	}
 	token = strtok(line, DELIM);
-	while (token != NULL) {
+	while (token != NULL)
+	{
 	tokens[position++] = token;
 	if (position >= bufsize)
 	{
 	bufsize += 64;
-	tokens = realloc(tokens, bufsize * sizeof(char*));
+	tokens = realloc(tokens, bufsize * sizeof(char *));
 	if (!tokens)
 	{
 	fprintf(stderr, "lsh: allocation error\n");
