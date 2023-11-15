@@ -49,9 +49,7 @@ for (; buffer_offset < buffer_length && !line_terminated; buffer_offset++)
 	} (*lineptr)[total_length++] = c;
 		if (c == '\n')
 		{ line_terminated = 1; }
-	}
-	}
+	} }
 	if (*lineptr)
 	{ (*lineptr)[total_length] = '\0'; }
-	return (total_length);
-}
+	return (total_length); }
