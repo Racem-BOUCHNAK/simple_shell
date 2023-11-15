@@ -11,17 +11,17 @@
  * Return: The number of characters read.
  */
 
-ssize_t custom_getline(char **lineptr, size_t *n, int fd) 
+ssize_t custom_getline(char **lineptr, size_t *n, int fd)
 {
 	static char buffer[BUFFER_SIZE];
-	static int buffer_offset = 0;
-	static int buffer_length = 0;
+	static int buffer_offset;
+	static int buffer_length;
 	ssize_t total_length = 0;
 	int line_terminated = 0;
 
 	if (!lineptr || !n)
 	{
-        return (-1);
+	return (-1);
 	}
 
 	*lineptr = NULL;
@@ -49,26 +49,21 @@ ssize_t custom_getline(char **lineptr, size_t *n, int fd)
 	char c = buffer[buffer_offset];
 
 	if ((size_t)total_length + 1 >= *n)
-	{
-		*n += BUFFER_SIZE;
-		*lineptr = realloc(*lineptr, *n);
+	{ *n += BUFFER_SIZE;
+	*lineptr = realloc(*lineptr, *n);
 		if (!*lineptr)
 		{
 		return (-1);
 		}
 	} (*lineptr)[total_length++] = c;
-
 		if (c == '\n')
 		{
 		line_terminated = 1;
 		}
 	}
 	}
-
-	if (*lineptr) 
-	{
-	(*lineptr)[total_length] = '\0';
+	if (*lineptr)
+	{ (*lineptr)[total_length] = '\0';
 	}
-
-	return total_length;
+	return (total_length);
 }
