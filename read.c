@@ -15,15 +15,12 @@ char *read_line()
 	ssize_t line_size;
 
 	line_size = custom_getline(&line, &bufsize, STDIN_FILENO);
-	if (line_size <= 0)
-	{
-	if (line)
-	{ free(line);
-	}
-	return (NULL);
+	if (line_size <= 0) {
+        free(line);
+        return NULL;
 	}
 
-	return (line);
+    return line;
 }
 
 char **split_line(char *line)

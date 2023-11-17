@@ -17,17 +17,23 @@ int main(void)
 
 void loop(void)
 {
-	char *line;
-	char **args;
-	int status;
+   char *line;
+    char **args;
+    int status;
 
-	do {
-	printf("$ ");
-	fflush(stdout);
-	line = read_line();
-	args = split_line(line);
-	status = execute(args);
-	free(line);
-	free(args);
-	} while (status);
+    do {
+        printf("> ");
+        fflush(stdout);
+
+        line = read_line();
+        if (line == NULL) {
+            break;
+	}
+
+        args = split_line(line);
+        status = execute(args);
+
+        free(line);
+        free(args);
+    } while (status);
 }
