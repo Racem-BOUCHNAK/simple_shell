@@ -1,55 +1,65 @@
 #include "hsh.h"
 
 /**
- * custom_getline - Reads a line from a file descriptor.
- * @lineptr: Pointer to the buffer that will contain the line.
- * @n: Pointer to the size of the buffer.
- * @fd: File descriptor to read from.
- *
- * Description: This function reads an entire line from a file descriptor.
- *
- * Return: The number of characters read.
- */
-
-ssize_t custom_getline(char **lineptr, size_t *n, int fd)
+* _getline - Read The Input
+* Return: Input
+*/
+char *_getline()
 {
-	static char buffer[BUFFER_SIZE];
-	static int buffer_offset, buffer_length;
-	ssize_t total_length = 0;
-	int line_terminated = 0;
+int i, buffsize = BUFSIZE, rd;
+char c = 0;
+char *buff = malloc(buffsize);
 
-	if (!lineptr || !n)
+	if (buff == NULL)
 	{
-	return (-1);
-	} *lineptr = NULL;
-	*n = 0;
-	while (!line_terminated)
-	{
-	if (buffer_offset >= buffer_length)
-	{ buffer_length = read(fd, buffer, BUFFER_SIZE);
-	if (buffer_length <= 0)
-	{
-	if (total_length == 0)
-		{
-		return (buffer_length);
-		}
-		break;
-		} buffer_offset = 0; }
-for (; buffer_offset < buffer_length && !line_terminated; buffer_offset++)
-	{
-	char c = buffer[buffer_offset];
+			free(buff);
+			return (NULL);
+	}
 
-	if ((size_t)total_length + 1 >= *n)
-	{ *n += BUFFER_SIZE;
-	*lineptr = realloc(*lineptr, *n);
-		if (!*lineptr)
+	for (i = 0; c != EOF && c != '\n'; i++)
+	{
+			fflush(stdin);
+			rd = read(STDIN_FILENO, &c, 1);
+			if (rd == 0)
+			{
+						free(buff);
+						exit(EXIT_SUCCESS);
+			}
+			buff[i] = c;
+			if (buff[0] == '\n')
+			{
+						free(buff);
+						return ("\0");
+			}
+			if (i >= buffsize)
+			{
+						buff = _realloc(buff, buffsize, buffsize + 1);
+						if (buff == NULL)
+						{
+										return (NULL);
+						}
+			}
+	}
+	buff[i] = '\0';
+	_hashtag(buff);
+	return (buff);
+}
+
+/**
+ * _hashtag - remove after #
+ * @buff: input;
+ * Return:void
+ */
+void _hashtag(char *buff)
+{
+	int i;
+
+		for (i = 0; buff[i] != '\0'; i++)
 		{
-		return (-1);
+					if (buff[i] == '#')
+					{
+								buff[i] = '\0';
+								break;
+					}
 		}
-	} (*lineptr)[total_length++] = c;
-		if (c == '\n')
-		{ line_terminated = 1; }
-	} }
-	if (*lineptr)
-	{ (*lineptr)[total_length] = '\0'; }
-	return (total_length); }
+}
