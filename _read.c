@@ -1,4 +1,5 @@
 #include "hsh.h"
+
 /**
  * _read - Read Command
  * @filename:Filename
@@ -16,12 +17,12 @@ void _read(char *filename, char **argv)
 	fp = fopen(filename, "r");
 	if (fp == NULL)
 	{
-			exit(EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 	while ((getline(&line, &len, fp)) != -1)
 	{
-			counter++;
-			treat(line, counter, fp, argv);
+		counter++;
+		treat(line, counter, fp, argv);
 
 	}
 	if (line)
@@ -29,14 +30,16 @@ void _read(char *filename, char **argv)
 	fclose(fp);
 	exit(0);
 }
+
 /**
- * treat - PARSE Check Command 
+ * treat - PARSE Check Command
  * @line: Line From A File
  * @counter:Error Counter
  * @fp:File Descriptor
  * @argv:Program Name
  * Return : Excute A line void
  */
+
 void treat(char *line, int counter, FILE *fp, char **argv)
 {
 	char **cmd;
@@ -46,19 +49,20 @@ void treat(char *line, int counter, FILE *fp, char **argv)
 
 		if (_strncmp(cmd[0], "exit", 4) == 0)
 		{
-					exit_bul(cmd, line, fp);
+			exit_bul(cmd, line, fp);
 		}
 		else if (check_builtin(cmd) == 0)
 		{
-					st = handle_builtin(cmd, st);
-					free(cmd);
+			st = handle_builtin(cmd, st);
+			free(cmd);
 		}
 		else
 		{
-					st = check_cmd(cmd, line, counter, argv);
-					free(cmd);
+			st = check_cmd(cmd, line, counter, argv);
+			free(cmd);
 		}
 }
+
 /**
  * exit_bul - Exit Shell
  * @line: Line From A File
@@ -66,30 +70,28 @@ void treat(char *line, int counter, FILE *fp, char **argv)
  * @fd:File Descriptor
  * Return : Exit
  */
+
 void exit_bul(char **cmd, char *line, FILE *fd)
 {
 	int statue, i = 0;
 
 	if (cmd[1] == NULL)
 	{
-			free(line);
-			free(cmd);
-			fclose(fd);
-			exit(errno);
+		free(line);
+		free(cmd);
+		fclose(fd);
+		exit(errno);
 	}
 	while (cmd[1][i])
 	{
-			if (_isalpha(cmd[1][i++]) < 0)
-			{
-						perror("illegal number");
-			}
+		if (_isalpha(cmd[1][i++]) < 0)
+		{
+			perror("illegal number");
+		}
 	}
 	statue = _atoi(cmd[1]);
 	free(line);
 	free(cmd);
 	fclose(fd);
 	exit(statue);
-
-
-
 }

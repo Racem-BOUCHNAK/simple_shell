@@ -8,7 +8,7 @@ void prompt(void)
 	PRINTER("$ ");
 }
 /**
- * error - Display Error 
+ * error - Display Error
  * @input:User Input
  * @counter:Simple Shell Count Loop
  * @argv:Program Name
